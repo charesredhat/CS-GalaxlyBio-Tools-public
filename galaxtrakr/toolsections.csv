@@ -1,0 +1,110 @@
+﻿Tool,Suggested_panel_name
+trimmomatic,Quality Control
+bio2srr,Get Data
+datasets_download_genome,Get Data
+ncbi_eutils_efetch,Get Data
+ncbi_acc_download,Get Data
+sra_tools,Get Data
+pysradb_search,Get Data
+upload1,Get Data
+fasta2tab,Convert Formats
+collapse_dataset,Convert Formats
+quast,Quality Control
+fastqc,Quality Control
+fastp,Quality Control
+prokka,Annotations
+drep_compare,Multiple  Sequence Alignment
+shovill,Assembly
+spades,Assembly
+skesa,Assembly
+fastani,Mapping
+mummer_dnadiff,Mapping
+crispr_recognition_tool,Screening and Prediction
+shigatyper,Screening and Prediction
+staramr_search,Screening and Prediction
+mlst,Screening and Prediction
+mlst_list,Screening and Prediction
+abricate,Screening and Prediction
+ectyper,Screening and Prediction
+mob_typer,Screening and Prediction
+rgi,Screening and Prediction
+refseq_masher_matches,Screening and Prediction
+porechop,Nanopore
+kraken2,Taxonomy Profiling
+megahit,Assembly/Binning
+maxbin2,Assembly/Binning
+megahit_contig2fastg,Assembly/Binning
+metagene_annotator,Annotation
+circos,Graph/Display Data
+circos_aln_to_links,Graph/Display Data
+circos_binlinks,Graph/Display Data
+circos_bundlelinks,Graph/Display Data
+circos_gc_skew,Graph/Display Data
+circos_interval_to_text,Graph/Display Data
+circos_interval_to_tile,Graph/Display Data
+circos_resample,Graph/Display Data
+circos_tableviewer,Graph/Display Data
+circos_wiggle_to_scatter,Graph/Display Data
+circos_wiggle_to_stacked,Graph/Display Data
+seqtk_comp,Fasta/Fastq
+seqtk_cutN,Fasta/Fastq
+seqtk_dropse,Fasta/Fastq
+seqtk_fqchk,Fasta/Fastq
+seqtk_hety,Fasta/Fastq
+seqtk_listhet,Fasta/Fastq
+seqtk_mergefa,Fasta/Fastq
+seqtk_mergepe,Fasta/Fastq
+seqtk_mutfa,Fasta/Fastq
+seqtk_randbase,Fasta/Fastq
+seqtk_sample,Fasta/Fastq
+seqtk_seq,Fasta/Fastq
+seqtk_subseq,Fasta/Fastq
+seqtk_trimfq,Fasta/Fastq
+cshl_fasta_clipping_histogram,Fasta/Fastq
+cshl_fasta_formatter,Fasta/Fastq
+cshl_fasta_nucleotides_changer,Fasta/Fastq
+cshl_fastq_quality_boxplot,Fasta/Fastq
+cshl_fastq_quality_converter,Fasta/Fastq
+cshl_fastq_quality_filter,Fasta/Fastq
+cshl_fastx_artifacts_filter,Fasta/Fastq
+cshl_fastx_barcode_splitter,Fasta/Fastq
+cshl_fastx_clipper,Fasta/Fastq
+cshl_fastx_collapser,Fasta/Fastq
+cshl_fastx_nucleotides_distribution,Fasta/Fastq
+cshl_fastx_quality_statistics,Fasta/Fastq
+cshl_fastx_reverse_complement,Fasta/Fastq
+cshl_fastx_renamer,Fasta/Fastq
+fasplit,Fasta/Fastq
+confindr,Quality Control
+reads_subsampler,Quality Control
+multiqc,Quality Control
+cutadapt,Quality Control
+iuc_pear,Quality Control
+trim_galore,Quality Control
+qualimap_multi_bamqc,SAM/BAM
+bam_to_sam,SAM/BAM
+bamFilter,SAM/BAM
+roary,Annotations
+spades_plasmidspades,Assembly
+bowtie2,Mapping
+bwa,Mapping
+bwa_mem,Mapping
+cd_hit_est,Mapping
+cd_hit_protein,Mapping
+sistr_cmd,Screening and Prediction
+ecoliserotyper,Screening and Prediction
+fraggenescan,Screening and Prediction
+render_tree,Phylogenetics
+fasttree,Phylogenetics
+iqtree,Phylogenetics
+newick_display,Phylogenetics
+rapidnj,Phylogenetics
+snippy,Variant Calling
+snippy_clean_full_aln,Variant Calling
+snippy_core,Variant Calling
+bwa_mem2,Variant Calling
+nanoplot,Nanopore
+nanopolish_methylation,Nanopore
+nanopolish_variants,Nanopore
+nanostat,Nanopore
+metaspades,Assembly/Binning

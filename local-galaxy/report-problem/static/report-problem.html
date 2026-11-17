@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Report a problem</title>
+        <link rel="stylesheet" href="dist/base.css" type="text/css" />
+        <style>
+            .report-form { max-width: 680px; }
+            .report-form textarea { min-height: 12rem; }
+            .counter { font-size: .85em; }
+        </style>
+    </head>
+    <body class="m-0">
+        <div class="container py-4 report-form">
+            <p><a href="welcome.html">&laquo; Back to the home page</a></p>
+            <h2>Report a problem with this Galaxy</h2>
+            <p>Describe what went wrong and the administrator will look into it.
+               Include what you were doing, which tool or dataset was involved, and any error message you saw.</p>
+
+            <form id="report" novalidate>
+                <div class="form-group mb-3">
+                    <label for="email">Your email <span class="text-muted">(so we can reply; optional)</span></label>
+                    <input type="email" class="form-control" id="email" name="email" maxlength="254" autocomplete="email">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="summary">Short summary</label>
+                    <input type="text" class="form-control" id="summary" name="summary" maxlength="200"
+                           placeholder="e.g. Upload of a FASTQ file never finishes">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="problem">What is the problem? <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="problem" name="problem" maxlength="5000" required></textarea>
+                    <div class="counter text-muted"><span id="count">0</span> / 5000</div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="send">Send report</button>
+            </form>
+
+            <div id="result" class="alert mt-3" role="status" hidden></div>
+        </div>
+
+        <script>
+            const form = document.getElementById("report");
+            const problem = document.getElementById("problem");
+            const result = document.getElementById("result");
+            const send = document.getElementById("send");
+
+            problem.addEventListener("input", () => {
+                document.getElementById("count").textContent = problem.value.length;
+            });
+
+            function show(kind, text) {
+                result.className = "alert mt-3 alert-" + kind;
+                result.textContent = text;
+                result.hidden = false;
+            }
+
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                if (!problem.value.trim()) {
+                    show("warning", "Please describe the problem before sending.");
+                    problem.focus();
+                    return;
+                }
+                const params = new URLSearchParams({
+                    email: form.email.value.trim(),
+                    summary: form.summary.value.trim(),
+                    problem: problem.value.trim(),
+                    page: document.referrer || "",
+                });
+                send.disabled = true;
+                try {
+                    const response = await fetch("../api/webhooks/report_problem/data?" + params, {
+                        credentials: "same-origin",
+                    });
+                    const data = await response.json();
+                    if (response.ok && data.ok) {
+                        form.reset();
+                        document.getElementById("count").textContent = "0";
+                        show("success", "Thanks - your report was sent. Reference: " + data.id);
+                    } else {
+                        show("danger", (data && data.error) || "The report could not be sent (HTTP " + response.status + ").");
+                    }
+                } catch (err) {
+                    show("danger", "The report could not be sent: " + err.message);
+                } finally {
+                    send.disabled = false;
+                }
+            });
+        </script>
+    </body>
+</html>

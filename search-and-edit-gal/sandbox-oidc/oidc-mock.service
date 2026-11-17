@@ -1,0 +1,27 @@
+[Unit]
+# Mock OpenID Provider for Galaxy SSO testing on this sandbox.
+#
+# NOT FOR PRODUCTION. This provider issues a valid ID token for ANY subject in
+# /opt/oidc-mock/users.yaml with no credential check whatsoever. It is bound to
+# 127.0.0.1 deliberately: exposed publicly it would let anyone mint a Galaxy
+# session for any email address, admins included.
+#
+# Remove with:
+#   sudo systemctl disable --now oidc-mock
+#   sudo rm /etc/systemd/system/oidc-mock.service && sudo systemctl daemon-reload
+#   sudo rm -rf /opt/oidc-mock
+Description=Mock OIDC provider for Galaxy sandbox SSO testing (NOT for production)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/oidc-mock
+ExecStart=/opt/oidc-mock/venv/bin/oidc-provider-mock \
+    --host 127.0.0.1 --port 9400 \
+    --user-claims-file /opt/oidc-mock/users.yaml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

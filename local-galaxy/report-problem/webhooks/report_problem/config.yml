@@ -1,0 +1,7 @@
+# Server-side handler for static/report-problem.html.
+# Inactive on purpose: it adds nothing to the Galaxy UI, but its __init__.py is
+# still reachable at /api/webhooks/report_problem/data.
+id: report_problem
+type:
+  - masthead
+activate: false

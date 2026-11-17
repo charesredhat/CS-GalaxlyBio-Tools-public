@@ -1,0 +1,26 @@
+
+MICRORUNQC BIOBLEND TEST REPORT
+Generated: 2025-10-29 12:00:52
+
+Galaxy Instance: http://127.0.0.1:8080/
+Tool ID: toolshed.g2.bx.psu.edu/repos/estrain/microrunqc/microrunqc/1.0.2
+Test History: 03501d7626bd192f
+
+FINDINGS:
+- MicrorunQC tool is installed in Galaxy
+- Tool requires MLST databases to function
+- No MLST databases currently configured
+- Alternative QC tools (FastQC) work correctly
+- Bioblend automation framework is functional
+
+RECOMMENDATIONS:
+1. Configure MLST databases for microrunQC
+2. Use alternative QC tools for immediate testing
+3. Set up data managers for automated database management
+4. Create workflows for standardized QC pipelines
+
+NEXT STEPS:
+1. Install MLST data manager tools
+2. Download/configure MLST databases
+3. Re-run microrunQC test with databases
+4. Implement automated workflow testing

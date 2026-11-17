@@ -1,0 +1,22 @@
+---
+- name: Install tools on local Galaxy instance
+  hosts: localhost
+  gather_facts: false
+  vars:
+    galaxy_url: "{{ lookup('env', 'GALAXY_URL') | default('http://127.0.0.1:8080/', true) }}"
+    galaxy_api_key: "{{ lookup('env', 'GALAXY_API_KEY') }}"
+    tool_list_file: "galaxtrakr/tool-menu.yml"
+  tasks:
+    # Section: Fasta/Fastq
+    # The following task(s) relate to tools in the Fasta/Fastq section of the Galaxy tool panel.
+    - name: Read tool list from YAML file
+      include_vars:
+        file: "{{ tool_list_file }}"
+        name: tool_data
+
+    - name: Install tools using community.general.galaxy_tool
+      community.general.galaxy_tool:
+        url: "{{ galaxy_url }}"
+        api_key: "{{ galaxy_api_key }}"
+        tools:
+          "{{ tool_data.tools }}"

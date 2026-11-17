@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Problem reports</title>
+<style>
+  /* Contrast: every text/background pair below is >= 4.5:1 (WCAG AA) in both
+     schemes, checked at the smallest size each token is used at. The meta row
+     is 0.84rem, so --muted is the pair that matters most; the earlier
+     #6b7a8d on #f7f9fb was about 3.9:1 and failed. */
+  :root {
+    --bg: #ffffff;
+    --surface: #f6f8fa;
+    --surface-2: #eef2f6;
+    --fg: #15202b;          /* 16.5:1 on --bg  */
+    --muted: #51606f;       /*  6.1:1 on --surface */
+    --line: #cfd8e3;
+    --accent: #1565a8;      /*  6.0:1 on --bg  */
+    --accent-line: #1565a8;
+    --warn-bg: #fdf4e3;
+    --warn-fg: #6b4a05;     /*  7.4:1 on --warn-bg */
+    --warn-line: #b07d20;
+    --ok-bg: #e4f2e6;
+    --ok-fg: #1d6327;       /*  6.3:1 on --ok-bg */
+    --ok-line: #9ac6a3;
+    --anon-bg: #eef2f6;
+    --anon-fg: #4a5967;
+    --focus: #1565a8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f141a;
+      --surface: #161d25;
+      --surface-2: #1d2631;
+      --fg: #e8edf3;
+      --muted: #a3b2c2;     /*  7.9:1 on --surface */
+      --line: #2c3742;
+      --accent: #6fb4ec;    /*  8.2:1 on --bg  */
+      --accent-line: #3d7fb8;
+      --warn-bg: #2a2214;
+      --warn-fg: #f0d79e;
+      --warn-line: #8a6a33;
+      --ok-bg: #15291b;
+      --ok-fg: #96d9a5;
+      --ok-line: #2f5c3a;
+      --anon-bg: #1d2631;
+      --anon-fg: #9fadbc;
+      --focus: #6fb4ec;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 56rem; margin: 0 auto; padding: 1.75rem 1rem 4rem; }
+
+  header { margin-bottom: 1.25rem; }
+  h1 { font-size: 1.5rem; line-height: 1.2; margin: 0 0 .3rem;
+       letter-spacing: -.01em; }
+  .sub { color: var(--muted); font-size: .9rem; }
+
+  /* Sticky so the filter stays reachable once the list is long. */
+  .bar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap;
+         gap: .5rem; align-items: center; padding: .75rem 0;
+         background: var(--bg); border-bottom: 1px solid var(--line);
+         margin-bottom: 1rem; }
+  input[type=search] { flex: 1 1 15rem; min-width: 0; padding: .5rem .7rem;
+         border: 1px solid var(--line); border-radius: 6px;
+         background: var(--bg); color: var(--fg); font: inherit; }
+  input[type=search]::placeholder { color: var(--muted); opacity: 1; }
+  button { padding: .5rem .9rem; border: 1px solid var(--line); border-radius: 6px;
+         background: var(--surface); color: var(--fg); font: inherit;
+         font-weight: 500; cursor: pointer; }
+  button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  button:disabled { opacity: .55; cursor: default; }
+  :is(button, input, [tabindex]):focus-visible { outline: 2px solid var(--focus);
+         outline-offset: 2px; }
+
+  .count { color: var(--muted); font-size: .85rem; margin-left: auto;
+           text-align: right; font-variant-numeric: tabular-nums; }
+
+  .msg { padding: .75rem .95rem; border-radius: 6px; font-size: .9rem;
+         border: 1px solid var(--warn-line); background: var(--warn-bg);
+         color: var(--warn-fg); margin-bottom: 1rem; }
+
+  .rep { border: 1px solid var(--line); border-left: 3px solid var(--accent-line);
+         border-radius: 6px; background: var(--surface);
+         padding: .9rem 1.05rem; margin-bottom: .8rem; }
+  .rep h2 { font-size: 1.02rem; line-height: 1.35; margin: 0 0 .5rem;
+            font-weight: 600; overflow-wrap: anywhere; }
+  .rep h2.none { font-weight: 500; font-style: italic; color: var(--muted); }
+
+  .meta { display: flex; flex-wrap: wrap; align-items: center;
+          gap: .3rem .9rem; color: var(--muted); font-size: .84rem;
+          margin-bottom: .7rem; }
+  .meta strong { font-weight: 600; color: var(--muted); }
+  .meta .v { color: var(--fg); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+         font-size: .85em; background: var(--surface-2); color: var(--fg);
+         padding: .1rem .35rem; border-radius: 4px; overflow-wrap: anywhere; }
+
+  .tag { font-size: .76rem; font-weight: 600; letter-spacing: .01em;
+         padding: .12rem .45rem; border-radius: 999px; border: 1px solid; }
+  .tag.signed { background: var(--ok-bg); color: var(--ok-fg); border-color: var(--ok-line); }
+  .tag.anon { background: var(--anon-bg); color: var(--anon-fg); border-color: var(--line); }
+
+  /* pre-wrap keeps the reporter's line breaks without letting their text
+     escape the box; overflow-wrap handles a 5000-char string with no spaces. */
+  .body { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0;
+          font: inherit; color: var(--fg); }
+
+  .from { margin-top: .7rem; padding-top: .6rem;
+          border-top: 1px dashed var(--line); font-size: .84rem;
+          color: var(--muted); }
+
+  .more { display: flex; justify-content: center; padding: .5rem 0 0; }
+  .empty { color: var(--muted); padding: 2rem 0; text-align: center; }
+  .hint { color: var(--muted); font-size: .8rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Problem reports</h1>
+    <div class="sub">Submitted through the &ldquo;Report a problem&rdquo; form. Administrators only.</div>
+  </header>
+
+  <div class="bar">
+    <input type="search" id="q" placeholder="Filter loaded reports&hellip;"
+           autocomplete="off" aria-label="Filter loaded reports by text, email or reference">
+    <button id="reload" type="button">Reload</button>
+    <span class="count" id="count" role="status" aria-live="polite"></span>
+  </div>
+
+  <div id="msg" hidden class="msg" role="status" aria-live="polite"></div>
+  <div id="list"></div>
+  <div class="more"><button id="older" type="button" hidden>Load older reports</button></div>
+</div>
+
+<script>
+// Every report value below is attacker-controlled: anyone who can reach Galaxy
+// can submit 5,000 characters of anything. It is therefore written with
+// textContent / createTextNode only -- never innerHTML, never a template
+// string spliced into markup. Keep it that way.
+(function () {
+  var listEl = document.getElementById("list");
+  var msgEl = document.getElementById("msg");
+  var countEl = document.getElementById("count");
+  var qEl = document.getElementById("q");
+  var olderEl = document.getElementById("older");
+  var reloadEl = document.getElementById("reload");
+
+  var PAGE = 200;               // per request; the handler's own cap is 500
+  var loaded = [];              // reports held client-side, newest first
+  var total = 0;                // records in the file
+  var scanned = 0;              // records the handler could parse
+  var busy = false;
+
+  function show(text) {
+    msgEl.textContent = text;
+    msgEl.hidden = false;
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text;
+    return n;
+  }
+
+  function field(parent, label, value, isCode) {
+    if (!value) return;
+    var span = el("span");
+    span.appendChild(el("strong", null, label + " "));
+    var v = el(isCode ? "code" : "span", isCode ? null : "v", String(value));
+    span.appendChild(v);
+    parent.appendChild(span);
+  }
+
+  // Shows the admin a timestamp in their own locale, keeping the exact value
+  // from the file in the tooltip. Falls back to the raw string if the
+  // reporter's record predates the ISO format or is corrupt.
+  function timeField(parent, raw) {
+    if (!raw) return;
+    var when = new Date(raw);
+    var span = el("span");
+    span.appendChild(el("strong", null, "Time "));
+    var v = el("span", "v", isNaN(when.getTime()) ? raw : when.toLocaleString());
+    v.title = raw;
+    span.appendChild(v);
+    parent.appendChild(span);
+  }
+
+  function card(r) {
+    var box = el("div", "rep");
+
+    var h = el("h2", r.summary ? null : "none",
+               r.summary || "(no summary given)");
+    box.appendChild(h);
+
+    var meta = el("div", "meta");
+    timeField(meta, r.time);
+    field(meta, "Ref", r.id, true);
+    if (r.email) {
+      field(meta, "Reply to", r.email);
+    } else {
+      meta.appendChild(el("span", null, "no reply address given"));
+    }
+    // An at-a-glance badge: whether Galaxy itself vouched for who sent this,
+    // or the email above is the only (unverified) contact detail.
+    if (r.logged_in_as) {
+      meta.appendChild(el("span", "tag signed", "signed in"));
+      field(meta, "as", r.logged_in_as);
+    } else {
+      meta.appendChild(el("span", "tag anon", "anonymous"));
+    }
+    box.appendChild(meta);
+
+    box.appendChild(el("p", "body", r.problem || "(empty)"));
+
+    if (r.page) {
+      var from = el("div", "from");
+      // Deliberately NOT a clickable link: the value is submitter-supplied and
+      // could be a javascript: or data: URI, or a phishing destination that
+      // looks like an internal page. Shown as text for the admin to judge.
+      field(from, "Reported from", r.page, true);
+      box.appendChild(from);
+    }
+    return box;
+  }
+
+  function render(rows) {
+    listEl.textContent = "";
+    if (!rows.length) {
+      listEl.appendChild(el("div", "empty", loaded.length
+        ? "No loaded reports match that filter."
+        : "No reports have been submitted yet."));
+      return;
+    }
+    var frag = document.createDocumentFragment();
+    rows.forEach(function (r) { frag.appendChild(card(r)); });
+    listEl.appendChild(frag);
+  }
+
+  // The count has to distinguish three numbers that used to be conflated into
+  // one: what is on screen, what is loaded, and what exists. Reporting only
+  // the first is how 400 reports once hid behind "500 report(s)".
+  function setCount(shown) {
+    var parts = [];
+    if (shown !== loaded.length) {
+      parts.push(shown + " of " + loaded.length + " loaded");
+    } else {
+      parts.push(loaded.length + (loaded.length === 1 ? " report" : " reports") + " loaded");
+    }
+    if (total > loaded.length) parts.push(total + " on file");
+    countEl.textContent = parts.join(" · ");
+  }
+
+  function applyFilter() {
+    var q = qEl.value.trim().toLowerCase();
+    if (!q) { render(loaded); setCount(loaded.length); return; }
+    var hit = loaded.filter(function (r) {
+      return [r.summary, r.problem, r.email, r.logged_in_as, r.id, r.page]
+        .some(function (v) { return v && String(v).toLowerCase().indexOf(q) !== -1; });
+    });
+    render(hit);
+    setCount(hit.length);
+  }
+
+  function updateOlder() {
+    // `scanned` is what the handler could parse, which is the real ceiling on
+    // what paging can reach; `total` may be higher if the file is huge.
+    var more = loaded.length < scanned;
+    olderEl.hidden = !more;
+    olderEl.disabled = busy;
+    olderEl.textContent = busy
+      ? "Loading…"
+      : "Load older reports (" + (scanned - loaded.length) + " more)";
+  }
+
+  function load(reset) {
+    if (busy) return;
+    busy = true;
+    if (reset) { loaded = []; qEl.value = ""; msgEl.hidden = true; }
+    countEl.textContent = "loading…";
+    updateOlder();
+
+    fetch("../api/webhooks/report_admin/data?limit=" + PAGE + "&offset=" + loaded.length,
+          { credentials: "same-origin", headers: { "Accept": "application/json" } })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        busy = false;
+        if (!d || d.ok !== true) {
+          countEl.textContent = "";
+          listEl.textContent = "";
+          olderEl.hidden = true;
+          show((d && d.error) ||
+               "Could not load reports. If you are not signed in as a Galaxy administrator, that is why.");
+          return;
+        }
+        total = d.total || 0;
+        scanned = d.scanned || 0;
+        loaded = loaded.concat(d.reports || []);
+        if (d.file_truncated) {
+          show("This file is large, so only its " + scanned +
+               " most recent records can be read (" + total +
+               " are on file). The older ones are still in reports.jsonl.");
+        }
+        applyFilter();
+        updateOlder();
+      })
+      .catch(function () {
+        busy = false;
+        countEl.textContent = "";
+        olderEl.hidden = true;
+        show("Could not reach Galaxy to load the reports.");
+      });
+  }
+
+  reloadEl.addEventListener("click", function () { load(true); });
+  olderEl.addEventListener("click", function () { load(false); });
+  qEl.addEventListener("input", applyFilter);
+  load(true);
+})();
+</script>
+</body>
+</html>

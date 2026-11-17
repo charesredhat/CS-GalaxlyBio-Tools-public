@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<toolbox>
+ <!-- Quality Control and Preprocessing -->
+  <section id="quality_control" name="Quality Control">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/b9aaed85cbd1/trimmomatic/trimmomatic.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/devteam/fastqc/2c64fded1286/fastqc/rgFastQC.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/estrain/sum_fastqc/d8ff95d96848/sum_fastqc/sum_fastqc/sum_fastqc.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/fastp/281054a26e41/fastp/fastp.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/fastplong/8d31d5da8662/fastplong/fastplong.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/porechop/a2899db6bd6e/porechop/porechop.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/porechop/a2899db6bd6e/porechop/porechop.xml" /> 
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/multiqc/31c42a2c02d3/multiqc/multiqc.xml" />
+  </section>
+  <!-- Data Acquisition and Download -->
+  <section id="data_acquisition" name="Data Acquisition">
+  <tool file="tools/opentrakr.org/repos/jpayne/bioproject2srr/216a1cc2a972/bioproject2srr/bio2srr.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/e063168e0a81/ncbi_acc_download/ncbi_acc_download.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/8848455c0270/sra_tools/fasterq_dump.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/8848455c0270/sra_tools/sam_dump.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/8848455c0270/sra_tools/fastq_dump.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/pysradb_search/f63cf0adfd87/pysradb_search/pysradb.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/pysradb_search/b91e1e70f3a1/pysradb_search/pysradb.xml" />
+  </section>
+
+ 
+
+  <!-- Nanopore Specific Tools 
+  </section id="Nanopore" name="Nanopore">
+    <tool file="shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/2a9afed42353/nanoplot/nanoplot.xml" />
+  </section>
+-->
+
+  <!-- Assembly -->
+  <section id="assembly" name="Assembly">
+  <tool file="tools/opentrakr.org/repos/estrain/metaspades/d4c3594e7f06/metaspades/metaspades/metaspades.xml" />
+  <tool file="tools/opentrakr.org/repos/estrain/spades_cpu7mem28/3fabd0027f02/spades_cpu7mem28/spades_cpu7mem28/spades_cpu7mem28.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/spades_biosyntheticspades/1fc82fe7ebef/spades_biosyntheticspades/biosyntheticspades.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/spades_metaviralspades/328aa71f0f3c/spades_metaviralspades/metaviralspades.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/spades_coronaspades/fee85957cebe/spades_coronaspades/coronaspades.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/nml/plasmidspades/a415d510332b/plasmidspades/plasmidSPAdes.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/cstrittmatter/skesa/280e8868b85e/skesa/skesa.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/shovill/ee17a294d3a3/shovill/shovill.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/megahit/ab208c87d973/megahit/megahit_wrapper.xml" />
+  </section>
+
+  <!-- Assembly Quality Assessment -->
+  <section id="assembly_qc" name="Assembly Quality Assessment">
+    <tool file="shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/quast/a3b35edea53a/quast/quast.xml" />
+    <tool file="shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/3967889cda03/rnaquast/rna_quast.xml" />
+    <tool file="shed_tools/toolshed.g2.bx.psu.edu/repos/greg/cfsan_snp_pipeline_quast_select/fedc60909fbe/cfsan_snp_pipeline_quast_select/cfsan_snp_pipeline_quast_select.xml" />
+  </section>
+
+  <!-- Mapping and Alignment -->
+  <section id="mapping" name="Mapping and Alignment">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/d5ceb9f3c25b/bowtie2/bowtie2_wrapper.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/af91699b8d4c/bwa_mem2/bwa-mem2.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/af91699b8d4c/bwa_mem2/bwa-mem2-idx.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/bwameth/b7ce99273d62/bwameth/bwameth.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/jjohnson/cdhit/28b7a43907f0/cdhit/cd_hit_est.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/jjohnson/cdhit/28b7a43907f0/cdhit/cd_hit_protein.xml" />
+  </section>
+
+  <!-- Variant Calling and SNP Analysis -->
+  <section id="variant_calling" name="Variant Calling">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/snippy/08d22d220254/snippy/snippy.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/snippy/08d22d220254/snippy/snippy-core.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/snippy/08d22d220254/snippy/snippy_clean_full_aln.xml" />
+  </section>
+
+  <!-- Genome Comparison and Analysis -->
+  <section id="genome_comparison" name="Genome Comparison">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/fastani/3c6e0e8df873/fastani/fastani.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/estrain/fastani_db/da7cafa2b1ea/fastani_db/fastani_db/fastani.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/mummer_dnadiff/29662f643859/mummer_dnadiff/dnadiff.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/drep_compare/f0334664a47b/drep_compare/drep_compare.xml" />
+  </section>
+
+  <!-- Typing and Characterization -->
+  <section id="Screening_and_Prediction" name="Screening and Prediction">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/mlst/31812e7a1315/mlst/mlst.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/mlst/31812e7a1315/mlst/mlst_list.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/dcouvin/pmlst2/140d4f9e1f20/pmlst2/pmlst.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/nml/getmlst/c2e910327131/getmlst/getmlst.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/nml/stringmlst/4e03573653fe/stringmlst/stringmlst.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/nml/ectyper/9cd096bee567/ectyper/ectyper.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/nml/sistr_cmd/cf767360ede1/sistr_cmd/sistr_cmd.xml" />
+  </section>
+
+  <!-- Antimicrobial Resistance -->
+  <section id="antimicrobial_resistance" name="Antimicrobial Resistance">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/abricate/c2ef298da409/abricate/abricate.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/abricate/c2ef298da409/abricate/abricate_list.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/abricate/c2ef298da409/abricate/abricate_summary.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/nml/staramr/3548a93b39c1/staramr/staramr_search.xml" />
+  <tool file="tools/opentrakr.org/repos/estrain/rgi/d9304db2b897/rgi/rgi/rgi.xml" />
+  </section>
+
+  <!-- Plasmid Analysis -->
+  <section id="plasmid_analysis" name="Plasmid Analysis">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/nml/mob_suite/179497074102/mob_suite/mob_typer.xml" />
+  </section>
+
+  <!-- Taxonomic Classification -->
+  <section id="taxonomic_classification" name="Taxonomic Classification">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/kraken2/20e2f64aa1fe/kraken2/kraken2.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/kraken2/e150ae930235/kraken2/kraken2.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/devteam/kraken2tax/acb48a12c0f2/kraken2tax/kraken2tax.xml" />
+  </section>
+
+  <!-- Phylogenetics -->
+  <section id="phylogenetics" name="Phylogenetics">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/fasttree/bc939965ce41/fasttree/fasttree.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/iqtree/18a61a9c1601/iqtree/iqtree.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/b4163d2f64ab/newick_utils/newick_display.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/dcorreia/newick_display/3200899efad9/newick_display/nwdisplay.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/roary/9b2b122d0415/roary/roary.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/roary/91887494eb97/roary/roary.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/jbarberoaparicio/roary/8da1a27aecff/roary/roary/myTools/roary_tool.xml" />
+  </section>
+
+  <!-- Sequence Utilities -->
+  <section id="Fasta_Fastq" name="Fasta/Fastq">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_comp.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_cutN.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_dropse.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_fqchk.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_hety.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_listhet.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_mergefa.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_mergepe.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_mutfa.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_randbase.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_sample.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_seq.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_subseq.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/seqtk/8511b6d85fc7/seqtk/seqtk_trimfq.xml" />
+  <tool file="tools/opentrakr.org/repos/jpayne/gtsubsampler/21b729b2b315/gtsubsampler/reads_subsampler.xml" />
+
+   
+  </section>
+
+  <!-- Annotation -->
+  <section id="annotation" name="Annotation">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/menegidio/mitoprokka/8813044f72bf/mitoprokka/mito-prokka/mito-prokka.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/galaxyp/metagene_annotator/17c7ab82bfbc/metagene_annotator/metagene_annotator.xml" />
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/bgruening/crispr_recognition_tool/13999e95b2d3/crispr_recognition_tool/crt.xml" />
+  </section>
+
+  <!-- Metagenomics -->
+  <section id="metagenomics" name="Metagenomics">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/mbernt/maxbin2/9da9706f7ca9/maxbin2/maxbin2.xml" />
+  </section>
+
+  <!-- Visualization -->
+  <section id="Graph_Display_Data" name="Graph/Display Data">
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/circos.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/stack-histogram.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/resample.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/gc_skew.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/scatter-from-wiggle.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/bundlelinks.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/binlinks.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/tableviewer.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/tiles-from-interval.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/text-from-interval.xml" />
+  <tool file="tools/testtoolshed.g2.bx.psu.edu/repos/iuc/circos/8b1cf140bbd4/circos/alignments-to-links.xml" />
+  </section>
+
+  <!-- Quality Assessment -->
+  <section id="quality_assessment" name="Quality Assessment">
+  <tool file="tools/toolshed.g2.bx.psu.edu/repos/iuc/qualimap_multi_bamqc/e38af83df163/qualimap_multi_bamqc/qualimap_multi_bamqc.xml" />
+  </section>
+</toolbox>

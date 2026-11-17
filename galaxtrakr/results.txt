@@ -1,0 +1,78 @@
+Matching Value,Source Row (CSV File A),Target Location (XML File B)
+Quality Control,11,toolbox/section@name
+Quality Control,12,toolbox/section@name
+Quality Control,13,toolbox/section@name
+Quality Control,14,toolbox/section@name
+Quality Control,78,toolbox/section@name
+Quality Control,79,toolbox/section@name
+Quality Control,80,toolbox/section@name
+Quality Control,81,toolbox/section@name
+Quality Control,82,toolbox/section@name
+Quality Control,83,toolbox/section@name
+Assembly,17,toolbox/section@name
+Assembly,18,toolbox/section@name
+Assembly,19,toolbox/section@name
+Assembly,88,toolbox/section@name
+Screening and Prediction,22,toolbox/section@name
+Screening and Prediction,23,toolbox/section@name
+Screening and Prediction,24,toolbox/section@name
+Screening and Prediction,25,toolbox/section@name
+Screening and Prediction,26,toolbox/section@name
+Screening and Prediction,27,toolbox/section@name
+Screening and Prediction,28,toolbox/section@name
+Screening and Prediction,29,toolbox/section@name
+Screening and Prediction,30,toolbox/section@name
+Screening and Prediction,31,toolbox/section@name
+Screening and Prediction,94,toolbox/section@name
+Screening and Prediction,95,toolbox/section@name
+Screening and Prediction,96,toolbox/section@name
+Annotation,37,toolbox/section@name
+Graph/Display Data,38,toolbox/section@name
+Graph/Display Data,39,toolbox/section@name
+Graph/Display Data,40,toolbox/section@name
+Graph/Display Data,41,toolbox/section@name
+Graph/Display Data,42,toolbox/section@name
+Graph/Display Data,43,toolbox/section@name
+Graph/Display Data,44,toolbox/section@name
+Graph/Display Data,45,toolbox/section@name
+Graph/Display Data,46,toolbox/section@name
+Graph/Display Data,47,toolbox/section@name
+Graph/Display Data,48,toolbox/section@name
+Fasta/Fastq,49,toolbox/section@name
+Fasta/Fastq,50,toolbox/section@name
+Fasta/Fastq,51,toolbox/section@name
+Fasta/Fastq,52,toolbox/section@name
+Fasta/Fastq,53,toolbox/section@name
+Fasta/Fastq,54,toolbox/section@name
+Fasta/Fastq,55,toolbox/section@name
+Fasta/Fastq,56,toolbox/section@name
+Fasta/Fastq,57,toolbox/section@name
+Fasta/Fastq,58,toolbox/section@name
+Fasta/Fastq,59,toolbox/section@name
+Fasta/Fastq,60,toolbox/section@name
+Fasta/Fastq,61,toolbox/section@name
+Fasta/Fastq,62,toolbox/section@name
+Fasta/Fastq,63,toolbox/section@name
+Fasta/Fastq,64,toolbox/section@name
+Fasta/Fastq,65,toolbox/section@name
+Fasta/Fastq,66,toolbox/section@name
+Fasta/Fastq,67,toolbox/section@name
+Fasta/Fastq,68,toolbox/section@name
+Fasta/Fastq,69,toolbox/section@name
+Fasta/Fastq,70,toolbox/section@name
+Fasta/Fastq,71,toolbox/section@name
+Fasta/Fastq,72,toolbox/section@name
+Fasta/Fastq,73,toolbox/section@name
+Fasta/Fastq,74,toolbox/section@name
+Fasta/Fastq,75,toolbox/section@name
+Fasta/Fastq,76,toolbox/section@name
+Fasta/Fastq,77,toolbox/section@name
+Phylogenetics,97,toolbox/section@name
+Phylogenetics,98,toolbox/section@name
+Phylogenetics,99,toolbox/section@name
+Phylogenetics,100,toolbox/section@name
+Phylogenetics,101,toolbox/section@name
+Variant Calling,102,toolbox/section@name
+Variant Calling,103,toolbox/section@name
+Variant Calling,104,toolbox/section@name
+Variant Calling,105,toolbox/section@name

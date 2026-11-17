@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Start a local Galaxy server and open it in the browser once it answers.
+# Closing this terminal window (or Ctrl+C) stops Galaxy.
+#
+# install-launcher.sh fills in the two defaults below; both can also be
+# overridden from the environment.
+GALAXY_DIR="${GALAXY_DIR:-@GALAXY_DIR@}"
+URL="${GALAXY_URL:-@GALAXY_URL@}"
+
+cd "$GALAXY_DIR" || { echo "Galaxy folder not found: $GALAXY_DIR (is the drive mounted?)"; read -r -p "Press Enter to close"; exit 1; }
+
+if curl -sf -o /dev/null "$URL/api/version"; then
+    echo "Galaxy is already running at $URL"
+    xdg-open "$URL" >/dev/null 2>&1
+    read -r -p "Press Enter to close"
+    exit 0
+fi
+
+(
+    until curl -sf -o /dev/null "$URL/api/version"; do sleep 3; done
+    echo; echo ">>> Galaxy is up at $URL - opening browser"; echo
+    xdg-open "$URL" >/dev/null 2>&1
+) &
+
+echo "Starting Galaxy (first start can take several minutes)..."
+./run.sh
+status=$?
+echo; echo "Galaxy stopped (exit $status)."
+read -r -p "Press Enter to close"

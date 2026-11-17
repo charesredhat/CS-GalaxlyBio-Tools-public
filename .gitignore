@@ -1,0 +1,71 @@
+# API Keys and Secrets
+Api-key-local/
+*.key
+*.pem
+*.secret
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+*.log
+*.tmp
+
+# Galaxy config files (may contain secrets)
+oidc_backends_config.xml
+oidc_config.xml
+
+# Archives
+*.zip
+*.tar.gz
+Galaxy_OIDC_Implementation_Guide.md
+
+# Generated test-account passwords
+test_users_credentials.csv
+
+# Credentials pulled onto the host at runtime
+*.p12
+*.pfx
+*.jks
+credentials
+credentials.*
+*_rsa
+*_ed25519
+*.ppk
+Api-key-local/
+API-key
+
+# Local Galaxy config that may carry real client IDs/secrets
+galaxy.yml
+*.bak
+*.orig
+
+# Anything explicitly marked private
+*private*
+*.local

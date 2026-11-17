@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+Galaxy OIDC backend configuration for the galaxytrakr SANDBOX only.
+
+This points Galaxy at a MOCK OpenID Provider (oidc-provider-mock) running on
+the Galaxy host itself, so test accounts can exercise a real end-to-end SSO
+login without a real IdP and without real email addresses.
+
+DO NOT COPY THIS TO A PRODUCTION INSTANCE. The provider it names issues a valid
+ID token for any subject listed in /opt/oidc-mock/users.yaml with no credential
+check at all. Its only protection is that it is bound to 127.0.0.1.
+
+`name="oidc"` selects galaxy.authnz.oidc.GalaxyOpenIdConnect, whose PSA backend
+name is also "oidc" (psa_authnz.py BACKENDS_NAME) — that string is what lands
+in oidc_user_authnz_tokens.provider.
+
+Both URLs below are deliberately host-local:
+  * oidc_endpoint  — Galaxy resolves discovery server-side, same host.
+  * redirect_uri   — the whole flow is driven on-host by
+                      link_users_via_oidc.py, so there is no browser to send
+                      to a public name, and keeping one origin keeps the
+                      galaxysession cookie consistent across the flow.
+Galaxy appends "/.well-known/openid-configuration" to oidc_endpoint itself.
+-->
+<OIDC>
+    <provider name="oidc">
+        <client_id>galaxy-sandbox</client_id>
+        <client_secret>sandbox-mock-not-a-real-secret</client_secret>
+        <redirect_uri>http://127.0.0.1:8080/authnz/oidc/callback</redirect_uri>
+        <oidc_endpoint>http://127.0.0.1:9400</oidc_endpoint>
+        <custom_button_text>Mock SSO (sandbox test only)</custom_button_text>
+    </provider>
+</OIDC>

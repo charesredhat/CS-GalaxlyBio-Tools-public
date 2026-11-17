@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# Blocks commits that would add secrets or infrastructure detail.
+#
+# Enable with:  git config core.hooksPath .githooks
+#
+# This is a safety net, not an audit. It scans only what is being added in this
+# commit -- it cannot see what is already in history. Bypass with --no-verify
+# only when you have looked at the hit and know it is a false positive.
+
+set -uo pipefail
+
+# Scan added lines only (leading '+'), so pre-existing content does not nag.
+#
+# Filtered with awk substring tests, not grep: a leading '+' is a quantifier in
+# BRE and some greps (ugrep, which ships as /usr/bin/grep on some distros)
+# reject '^\+\+\+' outright. That failure is silent in a pipeline -- the hook
+# then scans an empty string and passes every commit -- so this must not use a
+# regex dialect that varies between grep implementations.
+added="$(git diff --cached --no-color -U0 --diff-filter=ACM \
+         | awk 'substr($0,1,3)=="+++" {next} substr($0,1,1)=="+" {print}')"
+[ -z "$added" ] && exit 0
+
+status=0
+flag() {
+    local label="$1" pattern="$2" hits
+    hits="$(printf '%s\n' "$added" | grep -nEi -- "$pattern" || true)"
+    if [ -n "$hits" ]; then
+        printf '\n  [%s]\n' "$label"
+        printf '%s\n' "$hits" | head -5 | sed 's/^/    /'
+        status=1
+    fi
+}
+
+# --- credentials -----------------------------------------------------------
+flag "GitHub token"      'gh[pousr]_[A-Za-z0-9]{20,}'
+flag "AWS access key"    'AKIA[0-9A-Z]{16}'
+flag "Google OAuth secret" 'GOCSPX-[A-Za-z0-9_-]{20,}'
+flag "Slack token"       'xox[baprs]-[A-Za-z0-9-]{10,}'
+flag "Private key"       '-----BEGIN [A-Z ]*PRIVATE KEY'
+flag "Galaxy API key (32-hex)" '\b[0-9a-f]{32}\b'
+
+# --- infrastructure --------------------------------------------------------
+flag "Private IP address" '\b(10\.[0-9]{1,3}|192\.168|172\.(1[6-9]|2[0-9]|3[01]))\.[0-9]{1,3}\.[0-9]{1,3}\b'
+flag "AWS VPC/subnet id"  '\b(vpc|subnet)-[0-9a-f]{8,}'
+flag "EC2 public hostname" 'ec2-[0-9]+-[0-9]+-[0-9]+-[0-9]+\.[a-z0-9-]+\.amazonaws\.com'
+
+# --- assignments that look real --------------------------------------------
+assigns="$(printf '%s\n' "$added" \
+  | grep -nEi "(password|passwd|secret|api_?key|token)[\"']?[[:space:]]*[:=][[:space:]]*[\"'][^\"']{8,}[\"']" \
+  | grep -viE 'your[-_]|[-_]here|CHANGE|EXAMPLE|placeholder|not-a-real|redacted|getenv|environ|lookup\(|input\(|\$\(|\$\{|\{\{|<[A-Z_]+>|\bxxx' || true)"
+if [ -n "$assigns" ]; then
+    printf '\n  [Hardcoded credential assignment]\n'
+    printf '%s\n' "$assigns" | head -5 | sed 's/^/    /'
+    status=1
+fi
+
+if [ "$status" -ne 0 ]; then
+    cat >&2 <<'EOF'
+
+------------------------------------------------------------------
+COMMIT BLOCKED -- possible secret or infrastructure detail above.
+
+This repo is intended for public release. Anything committed here
+stays in history even if a later commit deletes it.
+
+  * real secret      -> remove it, then ROTATE it (assume exposed)
+  * real infra value -> replace with a placeholder
+  * false positive   -> git commit --no-verify
+------------------------------------------------------------------
+EOF
+    exit 1
+fi
+exit 0

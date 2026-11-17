@@ -1,0 +1,62 @@
+# Subjects the mock OpenID Provider will vouch for, loaded at startup via
+# --user-claims-file. All 10 sandbox test accounts.
+#
+# IMPORTANT: this file predefines CLAIMS; it does not restrict who may log in.
+# The mock provider authenticates any subject you hand it, and an unregistered
+# subject arrives with no email claim -- whereupon Galaxy (allow_user_creation:
+# true) auto-provisions a new account using the subject string as the email.
+# That is why the provider must stay bound to 127.0.0.1, and why you should not
+# type an arbitrary subject into its form.
+#
+# Subjects are deliberately opaque rather than emails: that is what a real IdP
+# sends, and it keeps the setup honest about uid being `sub`, never email.
+- sub: "mock-sub-00000001-testuser01"
+  email: "testuser01@example.org"
+  email_verified: true
+  name: "Test User 01"
+  preferred_username: "testuser01"
+- sub: "mock-sub-00000002-testuser02"
+  email: "testuser02@example.org"
+  email_verified: true
+  name: "Test User 02"
+  preferred_username: "testuser02"
+- sub: "mock-sub-00000003-testuser03"
+  email: "testuser03@example.org"
+  email_verified: true
+  name: "Test User 03"
+  preferred_username: "testuser03"
+- sub: "mock-sub-00000004-testuser04"
+  email: "testuser04@example.org"
+  email_verified: true
+  name: "Test User 04"
+  preferred_username: "testuser04"
+- sub: "mock-sub-00000005-testuser05"
+  email: "testuser05@example.org"
+  email_verified: true
+  name: "Test User 05"
+  preferred_username: "testuser05"
+- sub: "mock-sub-00000006-testuser06"
+  email: "testuser06@example.org"
+  email_verified: true
+  name: "Test User 06"
+  preferred_username: "testuser06"
+- sub: "mock-sub-00000007-testuser07"
+  email: "testuser07@example.org"
+  email_verified: true
+  name: "Test User 07"
+  preferred_username: "testuser07"
+- sub: "mock-sub-00000008-testuser08"
+  email: "testuser08@example.org"
+  email_verified: true
+  name: "Test User 08"
+  preferred_username: "testuser08"
+- sub: "mock-sub-00000009-testuser09"
+  email: "testuser09@example.org"
+  email_verified: true
+  name: "Test User 09"
+  preferred_username: "testuser09"
+- sub: "mock-sub-00000010-testuser10"
+  email: "testuser10@example.org"
+  email_verified: true
+  name: "Test User 10"
+  preferred_username: "testuser10"

@@ -1,0 +1,9 @@
+# Read-only admin view of submitted problem reports.
+#
+# Inactive on purpose: it adds nothing to the Galaxy UI, but its __init__.py is
+# still reachable at /api/webhooks/report_admin/data, which static/report-admin.html
+# fetches from. The handler refuses anyone who is not a Galaxy admin.
+id: report_admin
+type:
+  - masthead
+activate: false

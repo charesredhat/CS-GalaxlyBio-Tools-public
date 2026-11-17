@@ -1,0 +1,110 @@
+﻿Suggested_panel_name,Tool
+Get Data,bio2srr
+Get Data,datasets_download_genome
+Get Data,ncbi_eutils_efetch
+Get Data,ncbi_acc_download
+Get Data,sra_tools
+Get Data,pysradb_search
+Get Data,upload1
+Convert Formats,fasta2tab
+Convert Formats,collapse_dataset
+Quality Control,quast
+Quality Control,trimmomatic
+Quality Control,fastqc
+Quality Control,fastp
+Annotations,prokka
+Multiple  Sequence Alignment,drep_compare
+Assembly,shovill
+Assembly,spades
+Assembly,skesa
+Mapping,fastani
+Mapping,mummer_dnadiff
+Screening and Prediction,crispr_recognition_tool
+Screening and Prediction,shigatyper
+Screening and Prediction,staramr_search
+Screening and Prediction,mlst
+Screening and Prediction,mlst_list
+Screening and Prediction,abricate
+Screening and Prediction,ectyper
+Screening and Prediction,mob_typer
+Screening and Prediction,rgi
+Screening and Prediction,refseq_masher_matches
+Nanopore,porechop
+Taxonomy Profiling,kraken2
+Assembly/Binning,megahit
+Assembly/Binning,maxbin2
+Assembly/Binning,megahit_contig2fastg
+Annotation,metagene_annotator
+Graph/Display Data,circos
+Graph/Display Data,circos_aln_to_links
+Graph/Display Data,circos_binlinks
+Graph/Display Data,circos_bundlelinks
+Graph/Display Data,circos_gc_skew
+Graph/Display Data,circos_interval_to_text
+Graph/Display Data,circos_interval_to_tile
+Graph/Display Data,circos_resample
+Graph/Display Data,circos_tableviewer
+Graph/Display Data,circos_wiggle_to_scatter
+Graph/Display Data,circos_wiggle_to_stacked
+Fasta/Fastq,seqtk_comp
+Fasta/Fastq,seqtk_cutN
+Fasta/Fastq,seqtk_dropse
+Fasta/Fastq,seqtk_fqchk
+Fasta/Fastq,seqtk_hety
+Fasta/Fastq,seqtk_listhet
+Fasta/Fastq,seqtk_mergefa
+Fasta/Fastq,seqtk_mergepe
+Fasta/Fastq,seqtk_mutfa
+Fasta/Fastq,seqtk_randbase
+Fasta/Fastq,seqtk_sample
+Fasta/Fastq,seqtk_seq
+Fasta/Fastq,seqtk_subseq
+Fasta/Fastq,seqtk_trimfq
+Fasta/Fastq,cshl_fasta_clipping_histogram
+Fasta/Fastq,cshl_fasta_formatter
+Fasta/Fastq,cshl_fasta_nucleotides_changer
+Fasta/Fastq,cshl_fastq_quality_boxplot
+Fasta/Fastq,cshl_fastq_quality_converter
+Fasta/Fastq,cshl_fastq_quality_filter
+Fasta/Fastq,cshl_fastx_artifacts_filter
+Fasta/Fastq,cshl_fastx_barcode_splitter
+Fasta/Fastq,cshl_fastx_clipper
+Fasta/Fastq,cshl_fastx_collapser
+Fasta/Fastq,cshl_fastx_nucleotides_distribution
+Fasta/Fastq,cshl_fastx_quality_statistics
+Fasta/Fastq,cshl_fastx_reverse_complement
+Fasta/Fastq,cshl_fastx_renamer
+Fasta/Fastq,fasplit
+Quality Control,confindr
+Quality Control,reads_subsampler
+Quality Control,multiqc
+Quality Control,cutadapt
+Quality Control,iuc_pear
+Quality Control,trim_galore
+SAM/BAM,qualimap_multi_bamqc
+SAM/BAM,bam_to_sam
+SAM/BAM,bamFilter
+Annotations,roary
+Assembly,spades_plasmidspades
+Mapping,bowtie2
+Mapping,bwa
+Mapping,bwa_mem
+Mapping,cd_hit_est
+Mapping,cd_hit_protein
+Screening and Prediction,sistr_cmd
+Screening and Prediction,ecoliserotyper
+Screening and Prediction,fraggenescan
+Phylogenetics,render_tree
+Phylogenetics,fasttree
+Phylogenetics,iqtree
+Phylogenetics,newick_display
+Phylogenetics,rapidnj
+Variant Calling,snippy
+Variant Calling,snippy_clean_full_aln
+Variant Calling,snippy_core
+Variant Calling,bwa_mem2
+Nanopore,nanoplot
+Nanopore,nanopolish_methylation
+Nanopore,nanopolish_variants
+Nanopore,nanostat
+Assembly/Binning,metaspades
